@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<h2>Notes</h2>
+<div id="NoteListBlock"></div>
+<span class="AddLink ButtonLink">Add New Note</span>
+<div id="NoteDialog" title="" class="Hidden"></div>
+<script type="text/javascript">
+    $(function () {
+        $("#NoteDialog").dialog({
+            autoOpen: false, width: 400, height: 330, modal: true,
+            buttons: {
+            "Save": function () {
+                if ($("#NoteForm").validate().form()) {
+    $.post("/Home/Save",
+        $("#NoteForm").serialize(),
+        function (data) {
+            $("#NoteDialog").dialog("close");
+            $("#NoteListBlock").html(data);
+        });
+                }
+            },
+                Cancel: function () { $(this).dialog("close"); }
+            }
+        });
+        $(".EditLink").live("click", function () {
+            var id = $(this).attr("noteid");
+            $("#NoteDialog").html("")
+                .dialog("option", "title", "Edit Note")
+                .load("/Home/Edit/" + id, function () { $("#NoteDialog").dialog("open"); });
+        });
+        $(".AddLink").click(function () {
+            $("#NoteDialog").html("")
+                .dialog("option", "title", "Add Note")
+                .load("/Home/Create", function () { $("#NoteDialog").dialog("open"); });
+        });
+        LoadList();
+    });
+    function LoadList() {
+        $("#NoteListBlock").load("/Home/List");
+    }
+</script>

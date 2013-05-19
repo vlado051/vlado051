@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Website.Models.Note>
+<ul class="NotesList">
+    @foreach (var note in Model)
+    {
+    <li>
+        @note.Title <br />
+        @note.Body <br />
+        <span class="EditLink ButtonLink" noteid="@note.Id">Edit</span>
+    </li>
+    }
+</ul>

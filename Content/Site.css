@@ -1,0 +1,7 @@
+.ButtonLink { color:Blue; cursor:pointer; }
+.ButtonLink:hover { text-decoration:underline; }
+.Hidden { display:none; }
+#NoteForm label { display:block; margin-bottom:6px; }
+#NoteForm label > span { font-weight:bold; }
+#NoteForm input[type=text] { width:350px; }
+#NoteForm textarea { width:350px; height:80px; }
